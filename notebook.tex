@@ -1,0 +1,1668 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Model}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Jean-Baptiste Remy
+
+\#
+
+Model
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{os}\PY{o}{.}\PY{n}{chdir}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k+kn}{from} \PY{n+nn}{Codes}\PY{n+nn}{.}\PY{n+nn}{dna2vec} \PY{k}{import} \PY{n}{dna2vec}
+        \PY{k+kn}{from} \PY{n+nn}{Codes}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{svm}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{D2V} \PY{o}{=} \PY{n}{dna2vec}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/Xtr0.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{D2V}\PY{o}{.}\PY{n}{build\PYZus{}vocab}\PY{p}{(}\PY{n}{k\PYZus{}high}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{,} \PY{n}{k\PYZus{}low}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{N}\PY{o}{=}\PY{l+m+mi}{2000}\PY{p}{,} \PY{n}{vocab\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{4000}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{D2V}\PY{o}{.}\PY{n}{vocab\PYZus{}size}\PY{p}{)}
+        \PY{n}{D2V}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{window}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{n\PYZus{}negative}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{embeding\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{300}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+4000
+iter  0 0.00
+iter  10 38.41
+iter  20 72.09
+iter  30 108.28
+iter  40 142.33
+iter  50 177.65
+iter  60 215.30
+iter  70 252.74
+iter  80 286.75
+iter  90 323.43
+iter  100 359.61
+iter  110 396.31
+iter  120 429.15
+iter  130 463.32
+iter  140 493.06
+iter  150 524.71
+iter  160 557.92
+iter  170 591.51
+iter  180 624.84
+iter  190 660.09
+iter  200 695.87
+iter  210 729.07
+iter  220 766.66
+iter  230 802.32
+iter  240 839.74
+iter  250 878.32
+iter  260 914.51
+iter  270 951.21
+iter  280 988.07
+iter  290 1025.57
+iter  300 1059.23
+iter  310 1089.09
+iter  320 1107.47
+iter  330 1125.86
+iter  340 1144.08
+iter  350 1162.90
+iter  360 1180.92
+iter  370 1199.21
+iter  380 1218.89
+iter  390 1237.15
+iter  400 1255.63
+iter  410 1274.78
+iter  420 1292.57
+iter  430 1311.27
+iter  440 1329.37
+iter  450 1348.21
+iter  460 1366.87
+iter  470 1384.98
+iter  480 1404.28
+iter  490 1423.05
+iter  500 1441.21
+iter  510 1460.12
+iter  520 1478.32
+iter  530 1496.80
+iter  540 1515.58
+iter  550 1533.95
+iter  560 1552.60
+iter  570 1570.46
+iter  580 1589.19
+iter  590 1606.85
+iter  600 1625.88
+iter  610 1644.60
+iter  620 1663.24
+iter  630 1681.98
+iter  640 1700.64
+iter  650 1719.26
+iter  660 1738.02
+iter  670 1756.64
+iter  680 1775.01
+iter  690 1793.61
+iter  700 1812.64
+iter  710 1830.92
+iter  720 1850.14
+iter  730 1869.10
+iter  740 1887.75
+iter  750 1907.04
+iter  760 1925.60
+iter  770 1944.07
+iter  780 1962.31
+iter  790 1981.30
+iter  800 1999.49
+iter  810 2018.55
+iter  820 2037.35
+iter  830 2056.07
+iter  840 2075.14
+iter  850 2093.44
+iter  860 2111.50
+iter  870 2129.83
+iter  880 2148.31
+iter  890 2166.91
+iter  900 2184.94
+iter  910 2203.61
+iter  920 2221.97
+iter  930 2240.87
+iter  940 2259.19
+iter  950 2277.72
+iter  960 2296.34
+iter  970 2314.46
+iter  980 2333.30
+iter  990 2351.91
+iter  1000 2371.74
+iter  1010 2391.04
+iter  1020 2409.95
+iter  1030 2428.91
+iter  1040 2447.36
+iter  1050 2465.88
+iter  1060 2484.19
+iter  1070 2502.84
+iter  1080 2520.87
+iter  1090 2539.65
+iter  1100 2558.13
+iter  1110 2576.55
+iter  1120 2594.58
+iter  1130 2612.85
+iter  1140 2632.04
+iter  1150 2650.62
+iter  1160 2668.87
+iter  1170 2686.94
+iter  1180 2705.58
+iter  1190 2723.59
+iter  1200 2742.16
+iter  1210 2760.70
+iter  1220 2779.45
+iter  1230 2797.59
+iter  1240 2816.25
+iter  1250 2834.49
+iter  1260 2853.08
+iter  1270 2871.72
+iter  1280 2891.01
+iter  1290 2909.78
+iter  1300 2928.48
+iter  1310 2946.75
+iter  1320 2964.79
+iter  1330 2983.43
+iter  1340 3002.16
+iter  1350 3020.78
+iter  1360 3039.32
+iter  1370 3057.51
+iter  1380 3076.58
+iter  1390 3095.25
+iter  1400 3113.40
+iter  1410 3132.05
+iter  1420 3150.46
+iter  1430 3168.85
+iter  1440 3187.13
+iter  1450 3205.58
+iter  1460 3223.82
+iter  1470 3242.70
+iter  1480 3260.80
+iter  1490 3279.42
+iter  1500 3298.38
+iter  1510 3317.07
+iter  1520 3335.72
+iter  1530 3354.27
+iter  1540 3372.89
+iter  1550 3391.55
+iter  1560 3410.35
+iter  1570 3428.70
+iter  1580 3447.33
+iter  1590 3465.83
+iter  1600 3484.68
+iter  1610 3502.84
+iter  1620 3522.04
+iter  1630 3540.48
+iter  1640 3558.72
+iter  1650 3577.35
+iter  1660 3595.86
+iter  1670 3613.80
+iter  1680 3632.31
+iter  1690 3650.99
+iter  1700 3668.96
+iter  1710 3687.74
+iter  1720 3706.41
+iter  1730 3725.23
+iter  1740 3743.67
+iter  1750 3762.58
+iter  1760 3781.45
+iter  1770 3799.99
+iter  1780 3818.06
+iter  1790 3836.25
+iter  1800 3855.08
+iter  1810 3874.34
+iter  1820 3893.13
+iter  1830 3911.33
+iter  1840 3929.67
+iter  1850 3947.78
+iter  1860 3966.66
+iter  1870 3985.50
+iter  1880 4004.56
+iter  1890 4023.28
+iter  1900 4041.85
+iter  1910 4060.03
+iter  1920 4079.24
+iter  1930 4097.46
+iter  1940 4115.33
+iter  1950 4133.41
+iter  1960 4151.79
+iter  1970 4170.63
+iter  1980 4190.32
+iter  1990 4209.19
+iter  0 4227.37
+iter  10 4246.27
+iter  20 4265.21
+iter  30 4284.15
+iter  40 4302.26
+iter  50 4320.69
+iter  60 4339.11
+iter  70 4357.75
+iter  80 4376.74
+iter  90 4395.39
+iter  100 4413.55
+iter  110 4432.18
+iter  120 4450.91
+iter  130 4469.30
+iter  140 4487.27
+iter  150 4505.40
+iter  160 4524.03
+iter  170 4542.19
+iter  180 4560.70
+iter  190 4579.09
+iter  200 4597.48
+iter  210 4615.72
+iter  220 4634.82
+iter  230 4653.22
+iter  240 4672.23
+iter  250 4691.81
+iter  260 4710.55
+iter  270 4729.18
+iter  280 4747.90
+iter  290 4767.08
+iter  300 4785.55
+iter  310 4804.47
+iter  320 4822.60
+iter  330 4841.15
+iter  340 4859.43
+iter  350 4877.88
+iter  360 4895.96
+iter  370 4914.34
+iter  380 4932.90
+iter  390 4950.75
+iter  400 4969.28
+iter  410 4988.56
+iter  420 5006.44
+iter  430 5025.48
+iter  440 5043.72
+iter  450 5062.61
+iter  460 5080.96
+iter  470 5099.38
+iter  480 5118.57
+iter  490 5137.21
+iter  500 5155.35
+iter  510 5174.36
+iter  520 5192.35
+iter  530 5210.88
+iter  540 5229.65
+iter  550 5248.29
+iter  560 5267.03
+iter  570 5285.06
+iter  580 5303.72
+iter  590 5321.80
+iter  600 5340.48
+iter  610 5359.38
+iter  620 5377.83
+iter  630 5396.58
+iter  640 5415.65
+iter  650 5434.41
+iter  660 5453.22
+iter  670 5472.06
+iter  680 5490.72
+iter  690 5508.84
+iter  700 5527.85
+iter  710 5546.52
+iter  720 5565.93
+iter  730 5585.01
+iter  740 5603.62
+iter  750 5622.72
+iter  760 5641.27
+iter  770 5659.81
+iter  780 5678.43
+iter  790 5697.80
+iter  800 5716.19
+iter  810 5735.05
+iter  820 5753.95
+iter  830 5772.89
+iter  840 5791.81
+iter  850 5810.13
+iter  860 5827.80
+iter  870 5846.26
+iter  880 5864.65
+iter  890 5883.31
+iter  900 5901.63
+iter  910 5920.11
+iter  920 5938.62
+iter  930 5957.65
+iter  940 5977.31
+iter  950 5996.05
+iter  960 6014.68
+iter  970 6033.35
+iter  980 6052.26
+iter  990 6070.90
+iter  1000 6089.70
+iter  1010 6109.25
+iter  1020 6129.32
+iter  1030 6148.52
+iter  1040 6166.94
+iter  1050 6185.76
+iter  1060 6204.13
+iter  1070 6222.79
+iter  1080 6241.03
+iter  1090 6260.23
+iter  1100 6278.75
+iter  1110 6297.28
+iter  1120 6315.47
+iter  1130 6334.01
+iter  1140 6353.25
+iter  1150 6371.49
+iter  1160 6389.64
+iter  1170 6407.82
+iter  1180 6426.31
+iter  1190 6444.67
+iter  1200 6463.16
+iter  1210 6481.58
+iter  1220 6500.24
+iter  1230 6518.75
+iter  1240 6537.36
+iter  1250 6555.45
+iter  1260 6573.70
+iter  1270 6592.35
+iter  1280 6610.81
+iter  1290 6629.65
+iter  1300 6648.29
+iter  1310 6666.72
+iter  1320 6684.60
+iter  1330 6702.88
+iter  1340 6721.37
+iter  1350 6740.21
+iter  1360 6758.98
+iter  1370 6777.19
+iter  1380 6796.18
+iter  1390 6815.24
+iter  1400 6833.52
+iter  1410 6852.21
+iter  1420 6870.65
+iter  1430 6889.05
+iter  1440 6907.86
+iter  1450 6926.34
+iter  1460 6944.80
+iter  1470 6963.46
+iter  1480 6981.67
+iter  1490 7000.03
+iter  1500 7019.00
+iter  1510 7037.51
+iter  1520 7056.16
+iter  1530 7074.92
+iter  1540 7093.60
+iter  1550 7112.00
+iter  1560 7130.40
+iter  1570 7148.50
+iter  1580 7166.94
+iter  1590 7185.44
+iter  1600 7204.30
+iter  1610 7222.46
+iter  1620 7241.80
+iter  1630 7260.13
+iter  1640 7277.92
+iter  1650 7296.45
+iter  1660 7315.03
+iter  1670 7333.06
+iter  1680 7351.37
+iter  1690 7370.39
+iter  1700 7388.34
+iter  1710 7406.95
+iter  1720 7425.54
+iter  1730 7444.09
+iter  1740 7462.40
+iter  1750 7481.37
+iter  1760 7499.80
+iter  1770 7518.22
+iter  1780 7536.85
+iter  1790 7555.20
+iter  1800 7574.08
+iter  1810 7592.95
+iter  1820 7611.80
+iter  1830 7630.18
+iter  1840 7648.68
+iter  1850 7666.95
+iter  1860 7685.37
+iter  1870 7704.21
+iter  1880 7723.06
+iter  1890 7741.63
+iter  1900 7760.20
+iter  1910 7779.83
+iter  1920 7799.31
+iter  1930 7817.57
+iter  1940 7835.80
+iter  1950 7853.54
+iter  1960 7871.85
+iter  1970 7889.82
+iter  1980 7908.79
+iter  1990 7927.40
+iter  0 7945.61
+iter  10 7964.46
+iter  20 7983.05
+iter  30 8001.91
+iter  40 8020.15
+iter  50 8038.62
+iter  60 8057.51
+iter  70 8076.40
+iter  80 8095.28
+iter  90 8114.06
+iter  100 8132.68
+iter  110 8151.37
+iter  120 8170.12
+iter  130 8188.44
+iter  140 8206.83
+iter  150 8225.00
+iter  160 8243.42
+iter  170 8261.71
+iter  180 8280.26
+iter  190 8298.68
+iter  200 8316.56
+iter  210 8334.72
+iter  220 8353.77
+iter  230 8372.75
+iter  240 8391.60
+iter  250 8411.01
+iter  260 8429.57
+iter  270 8448.09
+iter  280 8466.68
+iter  290 8485.50
+iter  300 8503.76
+iter  310 8522.52
+iter  320 8541.76
+iter  330 8562.34
+iter  340 8581.56
+iter  350 8600.06
+iter  360 8618.06
+iter  370 8636.39
+iter  380 8657.34
+iter  390 8677.33
+iter  400 8697.25
+iter  410 8716.52
+iter  420 8735.31
+iter  430 8754.52
+iter  440 8773.04
+iter  450 8791.42
+iter  460 8812.05
+iter  470 8831.53
+iter  480 8850.54
+iter  490 8869.06
+iter  500 8887.37
+iter  510 8906.73
+iter  520 8924.60
+iter  530 8943.50
+iter  540 8962.55
+iter  550 8981.66
+iter  560 9000.20
+iter  570 9018.15
+iter  580 9036.66
+iter  590 9055.20
+iter  600 9074.45
+iter  610 9093.67
+iter  620 9113.51
+iter  630 9134.27
+iter  640 9155.29
+iter  650 9176.17
+iter  660 9195.61
+iter  670 9214.43
+iter  680 9233.49
+iter  690 9252.61
+iter  700 9272.62
+iter  710 9292.38
+iter  720 9313.04
+iter  730 9332.87
+iter  740 9352.42
+iter  750 9372.19
+iter  760 9391.41
+iter  770 9410.86
+iter  780 9428.93
+iter  790 9448.00
+iter  800 9466.85
+iter  810 9486.06
+iter  820 9505.26
+iter  830 9525.42
+iter  840 9544.76
+iter  850 9563.38
+iter  860 9582.08
+iter  870 9600.82
+iter  880 9621.11
+iter  890 9640.50
+iter  900 9659.32
+iter  910 9678.56
+iter  920 9697.89
+iter  930 9717.82
+iter  940 9738.21
+iter  950 9757.51
+iter  960 9778.74
+iter  970 9798.02
+iter  980 9819.86
+iter  990 9838.81
+iter  1000 9858.29
+iter  1010 9877.24
+iter  1020 9896.34
+iter  1030 9916.14
+iter  1040 9934.92
+iter  1050 9953.37
+iter  1060 9972.34
+iter  1070 9993.42
+iter  1080 10012.96
+iter  1090 10033.66
+iter  1100 10053.26
+iter  1110 10072.82
+iter  1120 10091.50
+iter  1130 10110.06
+iter  1140 10131.54
+iter  1150 10151.63
+iter  1160 10171.81
+iter  1170 10191.34
+iter  1180 10212.03
+iter  1190 10232.02
+iter  1200 10253.13
+iter  1210 10272.72
+iter  1220 10291.87
+iter  1230 10310.73
+iter  1240 10329.73
+iter  1250 10348.32
+iter  1260 10367.95
+iter  1270 10387.84
+iter  1280 10407.93
+iter  1290 10428.40
+iter  1300 10450.58
+iter  1310 10470.96
+iter  1320 10491.67
+iter  1330 10511.80
+iter  1340 10531.80
+iter  1350 10551.64
+iter  1360 10571.69
+iter  1370 10591.10
+iter  1380 10611.52
+iter  1390 10631.64
+iter  1400 10650.03
+iter  1410 10670.38
+iter  1420 10689.48
+iter  1430 10708.01
+iter  1440 10726.68
+iter  1450 10745.26
+iter  1460 10763.85
+iter  1470 10782.30
+iter  1480 10800.57
+iter  1490 10819.15
+iter  1500 10838.21
+iter  1510 10856.34
+iter  1520 10875.82
+iter  1530 10895.32
+iter  1540 10914.41
+iter  1550 10933.27
+iter  1560 10952.04
+iter  1570 10970.73
+iter  1580 10989.88
+iter  1590 11008.80
+iter  1600 11030.33
+iter  1610 11049.85
+iter  1620 11069.25
+iter  1630 11087.90
+iter  1640 11108.89
+iter  1650 11129.40
+iter  1660 11149.11
+iter  1670 11168.17
+iter  1680 11187.75
+iter  1690 11207.60
+iter  1700 11226.57
+iter  1710 11246.64
+iter  1720 11266.40
+iter  1730 11286.14
+iter  1740 11305.77
+iter  1750 11325.66
+iter  1760 11345.61
+iter  1770 11365.62
+iter  1780 11385.86
+iter  1790 11405.17
+iter  1800 11425.09
+iter  1810 11445.23
+iter  1820 11465.26
+iter  1830 11485.26
+iter  1840 11506.35
+iter  1850 11524.78
+iter  1860 11543.57
+iter  1870 11562.23
+iter  1880 11581.42
+iter  1890 11600.12
+iter  1900 11618.40
+iter  1910 11637.17
+iter  1920 11656.33
+iter  1930 11674.46
+iter  1940 11692.35
+iter  1950 11710.55
+iter  1960 11728.91
+iter  1970 11746.91
+iter  1980 11765.99
+iter  1990 11785.05
+iter  0 11802.95
+iter  10 11821.59
+iter  20 11841.01
+iter  30 11861.26
+iter  40 11881.39
+iter  50 11900.83
+iter  60 11920.20
+iter  70 11940.59
+iter  80 11960.82
+iter  90 11979.26
+iter  100 11997.51
+iter  110 12015.94
+iter  120 12036.82
+iter  130 12057.35
+iter  140 12076.88
+iter  150 12096.14
+iter  160 12116.16
+iter  170 12135.69
+iter  180 12155.16
+iter  190 12173.60
+iter  200 12192.32
+iter  210 12210.91
+iter  220 12230.40
+iter  230 12249.29
+iter  240 12268.88
+iter  250 12288.65
+iter  260 12307.88
+iter  270 12328.97
+iter  280 12347.50
+iter  290 12368.83
+iter  300 12388.21
+iter  310 12408.39
+iter  320 12427.76
+iter  330 12446.82
+iter  340 12465.80
+iter  350 12485.36
+iter  360 12505.20
+iter  370 12524.33
+iter  380 12542.87
+iter  390 12561.70
+iter  400 12582.10
+iter  410 12601.82
+iter  420 12619.82
+iter  430 12638.53
+iter  440 12657.25
+iter  450 12677.74
+iter  460 12697.15
+iter  470 12716.87
+iter  480 12738.67
+iter  490 12760.33
+iter  500 12780.21
+iter  510 12800.27
+iter  520 12820.86
+iter  530 12841.12
+iter  540 12861.65
+iter  550 12882.38
+iter  560 12903.36
+iter  570 12921.79
+iter  580 12941.51
+iter  590 12962.69
+iter  600 12982.47
+iter  610 13004.69
+iter  620 13026.08
+iter  630 13046.87
+iter  640 13066.91
+iter  650 13087.79
+iter  660 13108.03
+iter  670 13127.66
+iter  680 13146.77
+iter  690 13166.07
+iter  700 13186.26
+iter  710 13205.63
+iter  720 13225.67
+iter  730 13244.92
+iter  740 13263.98
+iter  750 13283.04
+iter  760 13302.48
+iter  770 13322.87
+iter  780 13343.27
+iter  790 13363.72
+iter  800 13383.37
+iter  810 13404.91
+iter  820 13425.42
+iter  830 13445.07
+iter  840 13463.98
+iter  850 13483.91
+iter  860 13503.34
+iter  870 13524.24
+iter  880 13545.02
+iter  890 13564.72
+iter  900 13583.83
+iter  910 13603.21
+iter  920 13622.66
+iter  930 13642.28
+iter  940 13662.28
+iter  950 13683.14
+iter  960 13702.63
+iter  970 13721.77
+iter  980 13741.42
+iter  990 13761.00
+iter  1000 13780.83
+iter  1010 13800.08
+iter  1020 13820.17
+iter  1030 13842.34
+iter  1040 13861.50
+iter  1050 13880.93
+iter  1060 13900.60
+iter  1070 13920.02
+iter  1080 13938.10
+iter  1090 13956.76
+iter  1100 13974.93
+iter  1110 13993.50
+iter  1120 14011.62
+iter  1130 14031.26
+iter  1140 14052.08
+iter  1150 14071.46
+iter  1160 14089.93
+iter  1170 14109.37
+iter  1180 14131.35
+iter  1190 14150.58
+iter  1200 14169.15
+iter  1210 14187.09
+iter  1220 14205.87
+iter  1230 14224.31
+iter  1240 14242.72
+iter  1250 14260.68
+iter  1260 14279.04
+iter  1270 14297.95
+iter  1280 14316.42
+iter  1290 14335.04
+iter  1300 14355.58
+iter  1310 14374.50
+iter  1320 14393.62
+iter  1330 14413.54
+iter  1340 14432.49
+iter  1350 14451.39
+iter  1360 14470.26
+iter  1370 14488.87
+iter  1380 14508.44
+iter  1390 14527.72
+iter  1400 14545.89
+iter  1410 14565.16
+iter  1420 14583.52
+iter  1430 14602.18
+iter  1440 14621.46
+iter  1450 14640.90
+iter  1460 14659.94
+iter  1470 14679.77
+iter  1480 14699.32
+iter  1490 14718.98
+iter  1500 14738.84
+iter  1510 14758.23
+iter  1520 14776.40
+iter  1530 14797.10
+iter  1540 14816.93
+iter  1550 14835.77
+iter  1560 14854.12
+iter  1570 14872.10
+iter  1580 14891.22
+iter  1590 14910.20
+iter  1600 14928.71
+iter  1610 14946.80
+iter  1620 14966.55
+iter  1630 14986.68
+iter  1640 15005.57
+iter  1650 15024.08
+iter  1660 15042.60
+iter  1670 15060.86
+iter  1680 15079.86
+iter  1690 15099.23
+iter  1700 15116.98
+iter  1710 15136.21
+iter  1720 15155.44
+iter  1730 15174.63
+iter  1740 15193.30
+iter  1750 15211.90
+iter  1760 15231.06
+iter  1770 15251.90
+iter  1780 15273.09
+iter  1790 15292.95
+iter  1800 15312.69
+iter  1810 15332.38
+iter  1820 15351.79
+iter  1830 15370.29
+iter  1840 15389.24
+iter  1850 15408.06
+iter  1860 15428.27
+iter  1870 15447.21
+iter  1880 15467.19
+iter  1890 15487.74
+iter  1900 15507.04
+iter  1910 15525.98
+iter  1920 15546.67
+iter  1930 15565.85
+iter  1940 15584.12
+iter  1950 15602.65
+iter  1960 15621.66
+iter  1970 15640.11
+iter  1980 15659.78
+iter  1990 15679.14
+iter  0 15697.57
+iter  10 15716.86
+iter  20 15736.04
+iter  30 15755.63
+iter  40 15773.74
+iter  50 15792.46
+iter  60 15811.29
+iter  70 15830.73
+iter  80 15849.95
+iter  90 15868.45
+iter  100 15887.48
+iter  110 15908.40
+iter  120 15929.90
+iter  130 15949.04
+iter  140 15967.07
+iter  150 15985.97
+iter  160 16004.52
+iter  170 16023.57
+iter  180 16042.78
+iter  190 16062.10
+iter  200 16080.68
+iter  210 16099.75
+iter  220 16118.95
+iter  230 16138.13
+iter  240 16159.52
+iter  250 16179.89
+iter  260 16198.42
+iter  270 16217.42
+iter  280 16236.65
+iter  290 16255.81
+iter  300 16275.50
+iter  310 16294.53
+iter  320 16314.27
+iter  330 16335.30
+iter  340 16354.96
+iter  350 16374.67
+iter  360 16393.52
+iter  370 16412.10
+iter  380 16430.99
+iter  390 16449.89
+iter  400 16469.18
+iter  410 16488.76
+iter  420 16507.57
+iter  430 16526.50
+iter  440 16546.09
+iter  450 16566.28
+iter  460 16585.80
+iter  470 16605.10
+iter  480 16626.39
+iter  490 16646.34
+iter  500 16666.08
+iter  510 16687.41
+iter  520 16708.21
+iter  530 16728.11
+iter  540 16747.80
+iter  550 16767.55
+iter  560 16787.59
+iter  570 16806.38
+iter  580 16826.09
+iter  590 16844.89
+iter  600 16864.35
+iter  610 16883.85
+iter  620 16903.58
+iter  630 16922.41
+iter  640 16941.77
+iter  650 16961.12
+iter  660 16980.21
+iter  670 16998.99
+iter  680 17017.50
+iter  690 17036.09
+iter  700 17055.78
+iter  710 17074.59
+iter  720 17094.03
+iter  730 17112.89
+iter  740 17132.07
+iter  750 17152.22
+iter  760 17171.55
+iter  770 17190.98
+iter  780 17210.61
+iter  790 17231.77
+iter  800 17250.78
+iter  810 17269.36
+iter  820 17288.52
+iter  830 17307.36
+iter  840 17326.46
+iter  850 17345.55
+iter  860 17364.05
+iter  870 17382.47
+iter  880 17401.73
+iter  890 17421.14
+iter  900 17440.31
+iter  910 17459.84
+iter  920 17478.91
+iter  930 17498.71
+iter  940 17518.45
+iter  950 17537.74
+iter  960 17557.23
+iter  970 17575.78
+iter  980 17595.49
+iter  990 17615.32
+iter  1000 17634.86
+iter  1010 17654.10
+iter  1020 17673.32
+iter  1030 17692.58
+iter  1040 17711.87
+iter  1050 17730.88
+iter  1060 17750.12
+iter  1070 17768.82
+iter  1080 17787.44
+iter  1090 17807.07
+iter  1100 17826.20
+iter  1110 17845.12
+iter  1120 17863.85
+iter  1130 17882.88
+iter  1140 17903.30
+iter  1150 17923.70
+iter  1160 17942.77
+iter  1170 17960.88
+iter  1180 17979.71
+iter  1190 17998.88
+iter  1200 18017.47
+iter  1210 18036.52
+iter  1220 18055.97
+iter  1230 18075.73
+iter  1240 18095.30
+iter  1250 18113.84
+iter  1260 18132.47
+iter  1270 18152.00
+iter  1280 18172.01
+iter  1290 18191.57
+iter  1300 18210.69
+iter  1310 18228.95
+iter  1320 18246.70
+iter  1330 18265.52
+iter  1340 18284.57
+iter  1350 18303.25
+iter  1360 18322.34
+iter  1370 18340.93
+iter  1380 18360.00
+iter  1390 18380.13
+iter  1400 18398.92
+iter  1410 18418.30
+iter  1420 18437.83
+iter  1430 18457.00
+iter  1440 18475.81
+iter  1450 18494.15
+iter  1460 18512.72
+iter  1470 18532.05
+iter  1480 18550.78
+iter  1490 18570.09
+iter  1500 18589.85
+iter  1510 18608.93
+iter  1520 18628.47
+iter  1530 18647.53
+iter  1540 18666.51
+iter  1550 18685.02
+iter  1560 18704.58
+iter  1570 18723.91
+iter  1580 18743.96
+iter  1590 18763.39
+iter  1600 18783.16
+iter  1610 18802.32
+iter  1620 18822.37
+iter  1630 18841.19
+iter  1640 18859.95
+iter  1650 18878.59
+iter  1660 18897.49
+iter  1670 18917.71
+iter  1680 18936.77
+iter  1690 18955.80
+iter  1700 18974.46
+iter  1710 18994.16
+iter  1720 19012.74
+iter  1730 19032.57
+iter  1740 19051.50
+iter  1750 19070.82
+iter  1760 19090.13
+iter  1770 19108.94
+iter  1780 19127.43
+iter  1790 19146.14
+iter  1800 19165.15
+iter  1810 19184.46
+iter  1820 19203.34
+iter  1830 19223.28
+iter  1840 19243.64
+iter  1850 19262.80
+iter  1860 19282.43
+iter  1870 19301.80
+iter  1880 19321.17
+iter  1890 19340.35
+iter  1900 19359.34
+iter  1910 19377.91
+iter  1920 19397.32
+iter  1930 19415.49
+iter  1940 19433.84
+iter  1950 19451.99
+iter  1960 19470.35
+iter  1970 19488.99
+iter  1980 19508.78
+iter  1990 19528.22
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+             \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/Xtr}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{.csv}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{file}\PY{p}{:}
+                 \PY{n}{S\PYZus{}list} \PY{o}{=} \PY{n}{file}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{S\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{S\PYZus{}list}\PY{p}{[}\PY{n}{\PYZus{}}\PY{p}{]} \PY{o}{=} \PY{n}{S\PYZus{}list}\PY{p}{[}\PY{n}{\PYZus{}}\PY{p}{]}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+         
+             \PY{n}{X} \PY{o}{=} \PY{n}{D2V}\PY{o}{.}\PY{n}{embed\PYZus{}data}\PY{p}{(}\PY{n}{S\PYZus{}list}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+             \PY{n}{np}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/X\PYZus{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZus{}embeded}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{,} \PY{n}{X}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{done}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0 done
+1 done
+2 done
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{time}
+         
+         \PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+             \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/Ytr}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{.csv}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{y}\PY{p}{[}\PY{n}{\PYZus{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{y}\PY{p}{[}\PY{n}{\PYZus{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+         
+             \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/X\PYZus{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZus{}embeded.npy}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{m} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{s} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{]}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}X[:, \PYZus{}] = (X[:, \PYZus{}] \PYZhy{} m)/s}
+         
+             \PY{k}{for} \PY{n}{reg} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{500}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{SVM} \PY{o}{=} \PY{n}{svm}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{SVM}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1600}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1600}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{reg}\PY{p}{,} \PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{polynomial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{l}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{y\PYZus{}pred\PYZus{}val}\PY{p}{,} \PY{n}{scores} \PY{o}{=} \PY{n}{SVM}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{400}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{y\PYZus{}pred}\PY{p}{,} \PY{n}{scores} \PY{o}{=} \PY{n}{SVM}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1600}\PY{p}{:}\PY{l+m+mi}{2000}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{err} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{n}{err\PYZus{}val} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{400}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{y\PYZus{}pred}\PY{p}{[}\PY{n}{\PYZus{}}\PY{p}{]} \PY{o}{!=} \PY{n}{y}\PY{p}{[}\PY{l+m+mi}{1600} \PY{o}{+} \PY{n}{\PYZus{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+                         \PY{n}{err} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                     
+                     \PY{k}{if} \PY{n}{y\PYZus{}pred\PYZus{}val}\PY{p}{[}\PY{n}{\PYZus{}}\PY{p}{]} \PY{o}{!=} \PY{n}{y}\PY{p}{[}\PY{n}{\PYZus{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+                         \PY{n}{err\PYZus{}val} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                     
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{reg}\PY{p}{,} \PY{n}{err}\PY{o}{/}\PY{l+m+mi}{400}\PY{p}{,} \PY{n}{err\PYZus{}val}\PY{o}{/}\PY{l+m+mi}{400}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{start\PYZus{}time}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Optimization terminated successfully.
+0 50 0.445 0.415 74.80
+Optimization terminated successfully.
+0 100 0.325 0.265 638.43
+Optimization terminated successfully.
+0 150 0.35 0.2975 1320.00
+Optimization terminated successfully.
+0 200 0.3525 0.3 2129.56
+Optimization terminated successfully.
+0 250 0.455 0.49 2336.05
+Optimization terminated successfully.
+0 300 0.4825 0.445 2555.52
+Optimization terminated successfully.
+0 350 0.5175 0.4825 2770.17
+Optimization terminated successfully.
+0 400 0.4 0.325 3042.69
+Optimization terminated successfully.
+0 450 0.52 0.4825 3146.75
+Optimization terminated successfully.
+1 50 0.29 0.17 3830.11
+Optimization terminated successfully.
+1 100 0.5 0.5025 3935.37
+Optimization terminated successfully.
+1 150 0.5 0.4975 3983.23
+Optimization terminated successfully.
+1 200 0.5 0.4975 4031.15
+Optimization terminated successfully.
+1 250 0.5 0.4975 4079.04
+Optimization terminated successfully.
+1 300 0.5 0.4975 4126.46
+Optimization terminated successfully.
+1 350 0.4975 0.4975 4174.23
+Optimization terminated successfully.
+1 400 0.4975 0.4975 4222.25
+Optimization terminated successfully.
+1 450 0.495 0.4975 4270.00
+Optimization terminated successfully.
+2 50 0.43 0.4775 4343.80
+Optimization terminated successfully.
+2 100 0.4975 0.445 4609.26
+Positive directional derivative for linesearch
+2 150 0.5125 0.46 4761.99
+Optimization terminated successfully.
+2 200 0.5125 0.46 4871.00
+Optimization terminated successfully.
+2 250 0.45 0.4525 4944.88
+Optimization terminated successfully.
+2 300 0.4575 0.46 5018.80
+Optimization terminated successfully.
+2 350 0.5125 0.46 5137.31
+Optimization terminated successfully.
+2 400 0.51 0.46 5255.68
+Optimization terminated successfully.
+2 450 0.485 0.455 5329.86
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+             \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/Xte}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{.csv}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{file}\PY{p}{:}
+                 \PY{n}{S\PYZus{}list} \PY{o}{=} \PY{n}{file}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{S\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{S\PYZus{}list}\PY{p}{[}\PY{n}{\PYZus{}}\PY{p}{]} \PY{o}{=} \PY{n}{S\PYZus{}list}\PY{p}{[}\PY{n}{\PYZus{}}\PY{p}{]}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+         
+             \PY{n}{X} \PY{o}{=} \PY{n}{D2V}\PY{o}{.}\PY{n}{embed\PYZus{}data}\PY{p}{(}\PY{n}{S\PYZus{}list}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+             \PY{n}{np}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/X\PYZus{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZus{}test\PYZus{}embeded}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{,} \PY{n}{X}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{done}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0 done
+1 done
+2 done
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{10090}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100
+150
+200
+250
+300
+350
+400
+450
+500
+550
+600
+650
+700
+750
+800
+850
+900
+950
+1000
+1050
+1100
+1150
+1200
+1250
+1300
+1350
+1400
+1450
+1500
+1550
+1600
+1650
+1700
+1750
+1800
+1850
+1900
+1950
+2000
+2050
+2100
+2150
+2200
+2250
+2300
+2350
+2400
+2450
+2500
+2550
+2600
+2650
+2700
+2750
+2800
+2850
+2900
+2950
+3000
+3050
+3100
+3150
+3200
+3250
+3300
+3350
+3400
+3450
+3500
+3550
+3600
+3650
+3700
+3750
+3800
+3850
+3900
+3950
+4000
+4050
+4100
+4150
+4200
+4250
+4300
+4350
+4400
+4450
+4500
+4550
+4600
+4650
+4700
+4750
+4800
+4850
+4900
+4950
+5000
+5050
+5100
+5150
+5200
+5250
+5300
+5350
+5400
+5450
+5500
+5550
+5600
+5650
+5700
+5750
+5800
+5850
+5900
+5950
+6000
+6050
+6100
+6150
+6200
+6250
+6300
+6350
+6400
+6450
+6500
+6550
+6600
+6650
+6700
+6750
+6800
+6850
+6900
+6950
+7000
+7050
+7100
+7150
+7200
+7250
+7300
+7350
+7400
+7450
+7500
+7550
+7600
+7650
+7700
+7750
+7800
+7850
+7900
+7950
+8000
+8050
+8100
+8150
+8200
+8250
+8300
+8350
+8400
+8450
+8500
+8550
+8600
+8650
+8700
+8750
+8800
+8850
+8900
+8950
+9000
+9050
+9100
+9150
+9200
+9250
+9300
+9350
+9400
+9450
+9500
+9550
+9600
+9650
+9700
+9750
+9800
+9850
+9900
+9950
+10000
+10050
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
